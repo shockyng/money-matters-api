@@ -12,15 +12,19 @@ import com.moneymatters.repositories.BillRepository;
 @Service
 public class BillService {
 
+    private final BillRepository billRepository;
+
     @Autowired
-    private BillRepository billRepository;
+    public BillService(BillRepository billRepository) {
+        this.billRepository = billRepository;
+    }
 
     public Iterable<Bill> getAll() {
         return billRepository.findAll();
     }
 
     public Bill getById(Long id) {
-        return billRepository.getById(id);
+        return billRepository.getReferenceById(id);
     }
 
     public Bill store(BillDto billDto) {

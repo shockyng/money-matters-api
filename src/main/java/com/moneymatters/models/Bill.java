@@ -2,7 +2,6 @@ package com.moneymatters.models;
 
 import java.sql.Date;
 
-import jakarta.validation.constraints.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +24,6 @@ public class Bill {
     @Column(name = "bill_price")
     private Double price;
 
-    //@Size(min = 2, message = "user name should have at least 2 characters")
     @Column(name = "bill_name")
     private String name;
 
