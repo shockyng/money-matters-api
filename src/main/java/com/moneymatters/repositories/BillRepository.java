@@ -1,5 +1,8 @@
 package com.moneymatters.repositories;
 
-public class BillRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.moneymatters.models.Bill;
+
+public interface BillRepository extends JpaRepository<Bill, Long> {
     
 }
