@@ -1,9 +1,10 @@
 package com.moneymatters.repositories;
 
-import com.moneymatters.models.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import com.moneymatters.data.models.Wallet;
 
 import java.util.ArrayList;
 

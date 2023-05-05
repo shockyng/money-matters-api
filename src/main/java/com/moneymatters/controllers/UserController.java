@@ -1,7 +1,7 @@
 package com.moneymatters.controllers;
 
-import com.moneymatters.dtos.UserDto;
-import com.moneymatters.models.User;
+import com.moneymatters.data.dtos.UserDto;
+import com.moneymatters.data.models.User;
 import com.moneymatters.services.UserService;
 import org.springframework.web.bind.annotation.*;
 

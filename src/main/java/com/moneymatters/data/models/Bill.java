@@ -1,4 +1,4 @@
-package com.moneymatters.models;
+package com.moneymatters.data.models;
 
 import java.sql.Date;
 

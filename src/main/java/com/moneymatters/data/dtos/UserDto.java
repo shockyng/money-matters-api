@@ -1,4 +1,4 @@
-package com.moneymatters.dtos;
+package com.moneymatters.data.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -5,8 +5,8 @@ import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.moneymatters.dtos.BillDto;
-import com.moneymatters.models.Bill;
+import com.moneymatters.data.dtos.BillDto;
+import com.moneymatters.data.models.Bill;
 import com.moneymatters.repositories.BillRepository;
 
 @Service

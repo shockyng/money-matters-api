@@ -1,8 +1,8 @@
 package com.moneymatters.services;
 
-import com.moneymatters.dtos.WalletDto;
-import com.moneymatters.models.User;
-import com.moneymatters.models.Wallet;
+import com.moneymatters.data.dtos.WalletDto;
+import com.moneymatters.data.models.User;
+import com.moneymatters.data.models.Wallet;
 import com.moneymatters.repositories.WalletRepository;
 import com.moneymatters.services.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
