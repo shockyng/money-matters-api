@@ -3,8 +3,6 @@ package com.moneymatters.controllers;
 import com.moneymatters.dtos.WalletDto;
 import com.moneymatters.models.Wallet;
 import com.moneymatters.services.WalletService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,33 +11,30 @@ import java.util.List;
 @RequestMapping("wallets")
 public class WalletController {
 
-    @Autowired
-    private WalletService walletService;
+    private final WalletService walletService;
+
+    public WalletController(WalletService walletService) {
+        this.walletService = walletService;
+    }
 
     @GetMapping
-    public ResponseEntity<List<Wallet>> findAll() {
-        List<Wallet> wallet = walletService.findAll();
-        return ResponseEntity.ok().body(wallet);
+    public List<Wallet> findAll() {
+        return walletService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Wallet> findById(@PathVariable("id") Long id) {
-        Wallet wallet = walletService.findById(id);
-        return ResponseEntity.ok().body(wallet);
+    public Wallet findById(@PathVariable("id") Long id) {
+        return walletService.findById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Wallet> store(@RequestBody WalletDto walletDto) {
-        Wallet wallet = walletService.store(walletDto);
-        return ResponseEntity.ok().body(wallet);
+    public Wallet store(@RequestBody WalletDto walletDto) {
+        return walletService.store(walletDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Wallet> update(@PathVariable("id") Long id, @RequestBody WalletDto walletDto) {
-        Wallet wallet = walletService.update(id, walletDto);
-        return ResponseEntity.ok().body(wallet);
+    public Wallet update(@PathVariable("id") Long id, @RequestBody WalletDto walletDto) {
+        return walletService.update(id, walletDto);
     }
-
-
 
 }

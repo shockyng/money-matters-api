@@ -1,5 +1,6 @@
 package com.moneymatters.dtos;
 
+import com.moneymatters.models.User;
 import lombok.Getter;
 import lombok.Setter;
 

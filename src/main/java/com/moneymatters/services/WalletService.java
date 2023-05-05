@@ -14,11 +14,13 @@ import java.util.List;
 @Service
 public class WalletService {
 
-    @Autowired
-    private WalletRepository walletRepository;
+    private final WalletRepository walletRepository;
+    private final UserService userService;
 
-    @Autowired
-    private UserService userService;
+    public WalletService(WalletRepository walletRepository, UserService userService) {
+        this.walletRepository = walletRepository;
+        this.userService = userService;
+    }
 
     public ArrayList<Wallet> getByUser(Long id) {
         return (ArrayList<Wallet>) walletRepository.walletFromUser(id);
@@ -43,7 +45,6 @@ public class WalletService {
         wallet.setName(walletDto.getName());
 
         return walletRepository.save(wallet);
-
     }
 
     private Wallet createWalletReceivingDto(WalletDto walletDto) {
