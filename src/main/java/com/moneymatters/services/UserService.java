@@ -12,6 +12,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public User findById(Long id) {
+        return userRepository.findById(id).get();
+    }
+
     public User storeUser(UserDto userDto) {
         User user = createUserReceivingDto(userDto);
         return userRepository.save(user);
