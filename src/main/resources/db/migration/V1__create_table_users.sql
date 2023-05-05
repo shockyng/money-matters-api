@@ -7,4 +7,4 @@ create table if not exists users (
     user_password VARCHAR(266) not null,
     user_created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     user_updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-    );
+);
