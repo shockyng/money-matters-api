@@ -1,8 +1,7 @@
-package com.moneymatters.models;
+package com.moneymatters.data.models;
 
 import java.sql.Date;
 
-import jakarta.validation.constraints.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +15,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "bills")
 public class Bill {
- 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bill_id")
@@ -25,14 +24,13 @@ public class Bill {
     @Column(name = "bill_price")
     private Double price;
 
-    //@Size(min = 2, message = "user name should have at least 2 characters")
     @Column(name = "bill_name")
     private String name;
 
     @Column(name = "bill_description")
     private String description;
 
-    @Column(name = "bill_payment_type")    
+    @Column(name = "bill_payment_type")
     private String paymentType;
 
     @Column(name = "bill_installments")
@@ -40,6 +38,5 @@ public class Bill {
 
     @Column(name = "bill_due_date")
     private Date dueDate;
-    
 
 }

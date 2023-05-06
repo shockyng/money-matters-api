@@ -1,7 +1,7 @@
 package com.moneymatters.services;
 
-import com.moneymatters.dtos.UserDto;
-import com.moneymatters.models.User;
+import com.moneymatters.data.dtos.UserDto;
+import com.moneymatters.data.models.User;
 import com.moneymatters.repositories.UserRepository;
 import com.moneymatters.services.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;

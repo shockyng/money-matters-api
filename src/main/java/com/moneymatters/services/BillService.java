@@ -3,24 +3,65 @@ package com.moneymatters.services;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.moneymatters.dtos.BillDto;
-import com.moneymatters.models.Bill;
+import com.moneymatters.data.dtos.BillDto;
+import com.moneymatters.data.models.Bill;
 import com.moneymatters.repositories.BillRepository;
 
 @Service
 public class BillService {
 
-    @Autowired
-    private BillRepository billRepository;
+    private final BillRepository billRepository;
 
-    public Iterable<Bill> getAll() {
-        return billRepository.findAll();
+    @Autowired
+    public BillService(BillRepository billRepository) {
+        this.billRepository = billRepository;
+    }
+
+    public Page<Bill> getAllPaged(String name, String description, String paymentType, Integer installments,
+            Date dueDate, Pageable pageable) {
+
+        if (name != null && !name.isEmpty()) {
+            return getAllByNamePaged(name, pageable);
+        } else if (description != null && !description.isEmpty()) {
+            return getAllByDescriptionPaged(description, pageable);
+        } else if (paymentType != null && !paymentType.isEmpty()) {
+            return getAllByPaymentTypePaged(paymentType, pageable);
+        } else if (installments != null && installments >= 0) {
+            return getAllByInstallmentsPaged(installments, pageable);
+        } else if (dueDate != null) {
+            return getAllByDueDatePaged(dueDate, pageable);
+        }
+
+        return billRepository.findAll(pageable);
+    }
+
+    private Page<Bill> getAllByDueDatePaged(Date dueDate, Pageable pageable) {
+        return billRepository.findAllByDueDatePaged(dueDate, pageable);
+    }
+
+    private Page<Bill> getAllByInstallmentsPaged(Integer installments, Pageable pageable) {
+        return billRepository.findAllByInstallmentsPaged(installments, pageable);
+    }
+
+    private Page<Bill> getAllByPaymentTypePaged(String paymentType, Pageable pageable) {
+        return billRepository.findAllByPaymentTypePaged(paymentType, pageable);
+    }
+
+    private Page<Bill> getAllByDescriptionPaged(String description, Pageable pageable) {
+        return billRepository.findAllByDescriptionPaged(description, pageable);
+    }
+
+    private Page<Bill> getAllByNamePaged(String name, Pageable pageable) {
+        return billRepository.findAllByNamePaged(name, pageable);
     }
 
     public Bill getById(Long id) {
-        return billRepository.getById(id);
+        return billRepository.getReferenceById(id);
     }
 
     public Bill store(BillDto billDto) {
