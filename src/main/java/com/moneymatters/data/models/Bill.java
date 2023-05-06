@@ -39,4 +39,26 @@ public class Bill {
     @Column(name = "bill_due_date")
     private Date dueDate;
 
+    public boolean isValid() {
+        if (price == null || price < 0) {
+            return false;
+        }
+        if (name == null || name.trim().isEmpty()) {
+            return false;
+        }
+        if (description == null || description.trim().isEmpty()) {
+            return false;
+        }
+        if (paymentType == null || paymentType.trim().isEmpty()) {
+            return false;
+        }
+        if (installments == null || installments < 0) {
+            return false;
+        }
+        if (dueDate == null) {
+            return false;
+        }
+        return true;
+    }
+
 }

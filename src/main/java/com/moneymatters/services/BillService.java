@@ -5,7 +5,6 @@ import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.moneymatters.data.dtos.BillDto;
@@ -60,22 +59,23 @@ public class BillService {
         return billRepository.findAllByNamePaged(name, pageable);
     }
 
-    public Bill getById(Long id) {
+    public Bill getById(Long id) throws Exception {
+        if (null == id || 0 <= id)
+            throw new Exception("Id cannot be null or smaller than 0.");
         return billRepository.getReferenceById(id);
     }
 
-    public Bill store(BillDto billDto) {
-        BillDto a = new BillDto(billDto.getPrice(), billDto.getName(), billDto.getDescription(),
-                billDto.getPaymentType(), billDto.getInstallments(), billDto.getDueDate());
-        return billRepository.save(convertDtoToBill(new Bill(), a));
+    public Bill store(BillDto billDto) throws Exception {
+        return billRepository.save(dtoToBill(new Bill(), billDto));
     }
 
-    public Bill update(Long id, BillDto billDto) {
-        Bill bill = getById(id);
-        return billRepository.save(convertDtoToBill(bill, billDto));
+    public Bill update(Long id, BillDto billDto) throws Exception {
+        return billRepository.save(dtoToBill(getById(id), billDto));
     }
 
-    Bill convertDtoToBill(Bill bill, BillDto billDto) {
+    Bill dtoToBill(Bill bill, BillDto billDto) throws Exception {
+
+        isValid(billDto);
 
         bill.setDescription(billDto.getDescription());
         Date date = Date.valueOf(billDto.getDueDate());
@@ -86,6 +86,22 @@ public class BillService {
         bill.setPrice(billDto.getPrice());
 
         return bill;
+    }
+
+    public void isValid(BillDto billDto) throws Exception {
+        if (null == billDto.getPrice() || 0 > billDto.getPrice()) {
+            throw new Exception("Price cannot be null and must be greater than 0.");
+        } else if (null == billDto.getName() || billDto.getName().trim().isEmpty()) {
+            throw new Exception("The name cannot be null or empty.");
+        } else if (null == billDto.getDescription() || billDto.getDescription().trim().isEmpty()) {
+            throw new Exception("Description cannot be null or empty.");
+        } else if (null == billDto.getPaymentType() || billDto.getPaymentType().trim().isEmpty()) {
+            throw new Exception("Payment type cannot be null or empty.");
+        } else if (null == billDto.getInstallments() || 0 > billDto.getInstallments()) {
+            throw new Exception("Instalments cannot be null and must be greater than 0.");
+        } else if (null == billDto.getDueDate() || billDto.getDueDate().trim().isEmpty()) {
+            throw new Exception("Due date cannot be null or empty.");
+        }
     }
 
 }

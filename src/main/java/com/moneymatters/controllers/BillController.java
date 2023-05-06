@@ -1,7 +1,6 @@
 package com.moneymatters.controllers;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,17 +37,17 @@ public class BillController {
     }
 
     @GetMapping("/{id}")
-    public Bill getById(@PathVariable("id") Long id) {
+    public Bill getById(@PathVariable("id") Long id) throws Exception {
         return billService.getById(id);
     }
 
     @PostMapping
-    public Bill store(@RequestBody BillDto billDto) {
+    public Bill store(@RequestBody BillDto billDto) throws Exception {
         return billService.store(billDto);
     }
 
     @PutMapping("/{id}")
-    public Bill update(@PathVariable("id") Long id, @RequestBody BillDto billDto) {
+    public Bill update(@PathVariable("id") Long id, @RequestBody BillDto billDto) throws Exception {
         return billService.update(id, billDto);
     }
 
