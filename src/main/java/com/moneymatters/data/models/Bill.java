@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "bills")
 public class Bill {
- 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bill_id")
@@ -30,7 +30,7 @@ public class Bill {
     @Column(name = "bill_description")
     private String description;
 
-    @Column(name = "bill_payment_type")    
+    @Column(name = "bill_payment_type")
     private String paymentType;
 
     @Column(name = "bill_installments")
@@ -38,6 +38,5 @@ public class Bill {
 
     @Column(name = "bill_due_date")
     private Date dueDate;
-    
 
 }
