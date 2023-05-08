@@ -1,4 +1,4 @@
-package com.moneymatters.mappers;
+package com.moneymatters.data.mappers;
 
 import com.moneymatters.data.dtos.BillDto;
 import com.moneymatters.data.models.Bill;
@@ -18,10 +18,6 @@ public interface BillDtoMapper {
 
     @Mapping(source = "dueDate", target = "dueDate", qualifiedByName = "stringToDate")
     Bill toBill(BillDto billDto);
-
-    @Mapping(source = "dueDate", target = "dueDate", qualifiedByName = "stringToDate")
-    @Mapping(target = "id", ignore = true)
-    void updateBillFromDto(BillDto billDto, @MappingTarget Bill bill);
 
     @Named("stringToDate")
     default Date stringToDate(String value) {

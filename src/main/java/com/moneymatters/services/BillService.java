@@ -2,7 +2,7 @@ package com.moneymatters.services;
 
 import java.sql.Date;
 
-import com.moneymatters.mappers.BillDtoMapper;
+import com.moneymatters.data.mappers.BillDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -72,8 +72,10 @@ public class BillService {
     public Bill update(Long id, BillDto billDto) throws Exception {
         isValid(billDto);
         Bill bill = getById(id);
-        BillDtoMapper.INSTANCE.updateBillFromDto(billDto, bill);
-        return billRepository.save(bill);
+        Bill billUpdated = BillDtoMapper.INSTANCE.toBill(billDto);
+        billUpdated.setId(bill.getId());
+
+        return billRepository.save(billUpdated);
     }
 
     public void isValid(BillDto billDto) throws Exception {
