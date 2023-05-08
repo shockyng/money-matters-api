@@ -2,10 +2,10 @@ package com.moneymatters.services;
 
 import java.sql.Date;
 
+import com.moneymatters.mappers.BillDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.moneymatters.data.dtos.BillDto;
@@ -22,18 +22,17 @@ public class BillService {
         this.billRepository = billRepository;
     }
 
-    public Page<Bill> getAllPaged(String name, String description, String paymentType, Integer installments,
-            Date dueDate, Pageable pageable) {
+    public Page<Bill> getAllPaged(String name, String description, String paymentType, Integer installments, Date dueDate, Pageable pageable) {
 
-        if (name != null && !name.isEmpty()) {
+        if (null != name && !name.isEmpty()) {
             return getAllByNamePaged(name, pageable);
-        } else if (description != null && !description.isEmpty()) {
+        } else if (null != description && !description.isEmpty()) {
             return getAllByDescriptionPaged(description, pageable);
-        } else if (paymentType != null && !paymentType.isEmpty()) {
+        } else if (null != paymentType && !paymentType.isEmpty()) {
             return getAllByPaymentTypePaged(paymentType, pageable);
-        } else if (installments != null && installments >= 0) {
+        } else if (null != installments && 0 >= installments) {
             return getAllByInstallmentsPaged(installments, pageable);
-        } else if (dueDate != null) {
+        } else if (null != dueDate) {
             return getAllByDueDatePaged(dueDate, pageable);
         }
 
@@ -60,32 +59,37 @@ public class BillService {
         return billRepository.findAllByNamePaged(name, pageable);
     }
 
-    public Bill getById(Long id) {
+    public Bill getById(Long id) throws Exception {
+        if (null == id || 0 >= id) throw new Exception("Id cannot be null or smaller than 0.");
         return billRepository.getReferenceById(id);
     }
 
-    public Bill store(BillDto billDto) {
-        BillDto a = new BillDto(billDto.getPrice(), billDto.getName(), billDto.getDescription(),
-                billDto.getPaymentType(), billDto.getInstallments(), billDto.getDueDate());
-        return billRepository.save(convertDtoToBill(new Bill(), a));
+    public Bill store(BillDto billDto) throws Exception {
+        isValid(billDto);
+        return billRepository.save(BillDtoMapper.INSTANCE.toBill(billDto));
     }
 
-    public Bill update(Long id, BillDto billDto) {
+    public Bill update(Long id, BillDto billDto) throws Exception {
+        isValid(billDto);
         Bill bill = getById(id);
-        return billRepository.save(convertDtoToBill(bill, billDto));
+        BillDtoMapper.INSTANCE.updateBillFromDto(billDto, bill);
+        return billRepository.save(bill);
     }
 
-    Bill convertDtoToBill(Bill bill, BillDto billDto) {
-
-        bill.setDescription(billDto.getDescription());
-        Date date = Date.valueOf(billDto.getDueDate());
-        bill.setDueDate(date);
-        bill.setInstallments(billDto.getInstallments());
-        bill.setName(billDto.getName());
-        bill.setPaymentType(billDto.getPaymentType());
-        bill.setPrice(billDto.getPrice());
-
-        return bill;
+    public void isValid(BillDto billDto) throws Exception {
+        if (null == billDto.getPrice() || 0 > billDto.getPrice()) {
+            throw new Exception("Price cannot be null and must be greater than 0.");
+        } else if (null == billDto.getName() || billDto.getName().trim().isEmpty()) {
+            throw new Exception("The name cannot be null or empty.");
+        } else if (null == billDto.getDescription() || billDto.getDescription().trim().isEmpty()) {
+            throw new Exception("Description cannot be null or empty.");
+        } else if (null == billDto.getPaymentType() || billDto.getPaymentType().trim().isEmpty()) {
+            throw new Exception("Payment type cannot be null or empty.");
+        } else if (null == billDto.getInstallments() || 0 > billDto.getInstallments()) {
+            throw new Exception("Instalments cannot be null and must be greater than 0.");
+        } else if (null == billDto.getDueDate() || billDto.getDueDate().trim().isEmpty()) {
+            throw new Exception("Due date cannot be null or empty.");
+        }
     }
 
 }
