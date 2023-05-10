@@ -4,6 +4,8 @@ import com.moneymatters.data.dtos.UserDto;
 import com.moneymatters.data.models.User;
 import com.moneymatters.repositories.UserRepository;
 import com.moneymatters.services.exceptions.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +16,6 @@ public class UserService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
-
-    public List<User> findAll() {
-        return userRepository.findAll();
     }
 
     public User findById(Long id) {
@@ -40,6 +38,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void delete(Long id) {
+        User user = findById(id);
+        userRepository.delete(user);
+    }
+
     private User createUserReceivingDto(UserDto userDto) {
         User user = new User();
 
@@ -52,4 +55,20 @@ public class UserService {
         return user;
     }
 
+    public Page<User> findAllPaged(String username, String email, Pageable pageable) {
+        if (null != username && !username.isEmpty() ) {
+            return findByUsernamePaged(username, pageable);
+        } else if (null != email && !email.isEmpty()) {
+            return findByEmailPaged(email, pageable);
+        }
+        return userRepository.findAll(pageable);
+    }
+
+    private Page<User> findByUsernamePaged(String username, Pageable pageable) {
+        return userRepository.findByUsername(username, pageable);
+    }
+
+    private Page<User> findByEmailPaged(String email, Pageable pageable) {
+        return userRepository.findByEmail(email, pageable);
+    }
 }

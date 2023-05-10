@@ -7,4 +7,5 @@ create table if not exists wallets (
     CONSTRAINT kf_user
         FOREIGN KEY (wallet_user_fk)
         REFERENCES Users(user_id)
+        ON DELETE CASCADE
 );
