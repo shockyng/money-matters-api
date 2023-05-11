@@ -29,6 +29,11 @@ public class SaleController {
         return saleService.getById(id);
     }
 
+    @GetMapping("/sale-comparison-month-over-month")
+    public Integer getSalesComparedToPastMonth() {
+        return saleService.getSalesComparedToPastMonth();
+    }
+
     @PostMapping
     public Sale store(@RequestBody SaleDto saleDto) {
         return saleService.store(saleDto);
@@ -39,4 +44,9 @@ public class SaleController {
         return saleService.update(status, id);
     }
 
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        saleService.delete(id);
+        return "Successfully deleted sale";
+    }
 }

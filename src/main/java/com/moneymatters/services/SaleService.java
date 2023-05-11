@@ -30,6 +30,11 @@ public class SaleService {
         return saleRepository.getReferenceById(id);
     }
 
+    public Integer getSalesComparedToPastMonth() {
+        String[] sales = saleRepository.getSalesComparedToPastMonth().split(",");
+        return Integer.parseInt(sales[0]) - Integer.parseInt(sales[1]);
+    }
+
     public Sale store(SaleDto saleDto) {
         Sale sale = SaleDtoMapper.INSTANCE.toSale(saleDto);
         sale.setUser(userService.findById(saleDto.getUserId()));
@@ -40,5 +45,9 @@ public class SaleService {
         Sale sale = getById(id);
         sale.setStatus(status);
         return saleRepository.save(sale);
+    }
+
+    public void delete(Long id) {
+        saleRepository.deleteById(id);
     }
 }
