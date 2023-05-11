@@ -49,4 +49,9 @@ public class UserController {
         return "Successfully deleted user";
     }
 
+    @GetMapping("/user-comparison-month-over-month")
+    public Integer userComparisonMonthOverMonth() {
+        return userService.userComparisonMonthOverMonth();
+    }
+
 }

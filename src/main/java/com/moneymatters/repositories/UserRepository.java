@@ -17,4 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE CONCAT(u.username, '') LIKE %?1%")
     Page<User> findByUsername(String username, Pageable pageable);
+
+    @Query("SELECT COUNT(u) FILTER(WHERE EXTRACT(MONTH FROM u.createdAt) = EXTRACT(MONTH FROM CURRENT DATE )) AS currentMonth, " +
+            "(SELECT COUNT(*) FROM User u2 WHERE EXTRACT(MONTH FROM u2.createdAt) = (EXTRACT(MONTH FROM CURRENT DATE)-1)) as lastMonth FROM User u")
+    String usersFromMonth();
 }

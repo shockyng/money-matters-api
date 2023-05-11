@@ -71,4 +71,13 @@ public class UserService {
     private Page<User> findByEmailPaged(String email, Pageable pageable) {
         return userRepository.findByEmail(email, pageable);
     }
+
+    public Integer userComparisonMonthOverMonth() {
+        String[] countUsers = userRepository.usersFromMonth().split(",");
+
+        Integer countUsersCurrentMonth = Integer.parseInt(countUsers[0]);
+        Integer countUsersLastMonth = Integer.parseInt(countUsers[1]);
+
+        return countUsersCurrentMonth - countUsersLastMonth;
+    }
 }

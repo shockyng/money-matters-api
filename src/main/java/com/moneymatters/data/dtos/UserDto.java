@@ -1,8 +1,13 @@
 package com.moneymatters.data.dtos;
 
-import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.ZonedDateTime;
 
 @Getter
 @Setter
@@ -23,6 +28,13 @@ public class UserDto {
 
     @NotBlank
     @Size(min = 8, max = 20, message = "Password must be 8-20 characters")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private ZonedDateTime createdAt;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private ZonedDateTime updatedAt;
 
 }
