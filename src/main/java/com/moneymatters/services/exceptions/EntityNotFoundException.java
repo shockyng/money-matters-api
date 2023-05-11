@@ -1,6 +1,6 @@
 package com.moneymatters.services.exceptions;
 
-public class EntityNotFoundException extends RuntimeException{
+public class EntityNotFoundException extends RuntimeException {
 
     static final long serialVersionUID = 1L;
 

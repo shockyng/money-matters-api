@@ -56,5 +56,4 @@ public class WalletService {
 
         return wallet;
     }
-
 }

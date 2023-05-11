@@ -1,16 +1,15 @@
 package com.moneymatters.services;
 
-import java.sql.Date;
-
+import com.moneymatters.data.dtos.BillDto;
 import com.moneymatters.data.mappers.BillDtoMapper;
+import com.moneymatters.data.models.Bill;
+import com.moneymatters.repositories.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.moneymatters.data.dtos.BillDto;
-import com.moneymatters.data.models.Bill;
-import com.moneymatters.repositories.BillRepository;
+import java.sql.Date;
 
 @Service
 public class BillService {
@@ -78,6 +77,10 @@ public class BillService {
         return billRepository.save(billUpdated);
     }
 
+    public void delete(Long id) {
+        billRepository.deleteById(id);
+    }
+
     public void isValid(BillDto billDto) throws Exception {
         if (null == billDto.getPrice() || 0 > billDto.getPrice()) {
             throw new Exception("Price cannot be null and must be greater than 0.");
@@ -93,5 +96,4 @@ public class BillService {
             throw new Exception("Due date cannot be null or empty.");
         }
     }
-
 }

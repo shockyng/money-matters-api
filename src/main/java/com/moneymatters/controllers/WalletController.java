@@ -36,5 +36,4 @@ public class WalletController {
     public Wallet update(@PathVariable("id") Long id, @RequestBody WalletDto walletDto) {
         return walletService.update(id, walletDto);
     }
-
 }

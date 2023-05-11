@@ -25,8 +25,8 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> methodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
-    String error = "Method argument not valid";
-    StandardError err = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(), error, e.getMessage(), request.getRequestURI());
+        String error = "Method argument not valid";
+        StandardError err = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.badRequest().body(err);
     }
 
@@ -37,5 +37,4 @@ public class ControllerExceptionHandler {
         StandardError err = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(), errors, e.getMessage(), request.getRequestURI());
         return ResponseEntity.badRequest().body(err);
     }
-
 }

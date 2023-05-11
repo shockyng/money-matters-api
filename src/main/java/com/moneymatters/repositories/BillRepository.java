@@ -1,13 +1,12 @@
 package com.moneymatters.repositories;
 
-import java.sql.Date;
-
+import com.moneymatters.data.models.Bill;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.moneymatters.data.models.Bill;
+import java.sql.Date;
 
 public interface BillRepository extends JpaRepository<Bill, Long> {
 

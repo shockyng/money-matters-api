@@ -8,8 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -19,7 +17,7 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id) );
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     public User store(UserDto userDto) {
@@ -56,7 +54,7 @@ public class UserService {
     }
 
     public Page<User> findAllPaged(String username, String email, Pageable pageable) {
-        if (null != username && !username.isEmpty() ) {
+        if (null != username && !username.isEmpty()) {
             return findByUsernamePaged(username, pageable);
         } else if (null != email && !email.isEmpty()) {
             return findByEmailPaged(email, pageable);

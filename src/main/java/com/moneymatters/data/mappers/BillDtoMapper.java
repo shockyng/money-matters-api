@@ -4,7 +4,6 @@ import com.moneymatters.data.dtos.BillDto;
 import com.moneymatters.data.models.Bill;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
@@ -29,5 +28,4 @@ public interface BillDtoMapper {
             throw new RuntimeException("Error during date updating");
         }
     }
-
 }
