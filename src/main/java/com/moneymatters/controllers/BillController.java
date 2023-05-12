@@ -5,6 +5,8 @@ import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.moneymatters.data.dtos.BillDto;
@@ -24,10 +26,10 @@ public class BillController {
 
     @GetMapping("/page")
     public Page<Bill> getAllPaged(@RequestParam(required = false) String name,
-                                  @RequestParam(required = false) String description,
-                                  @RequestParam(required = false) String paymentType,
-                                  @RequestParam(required = false) Integer installments,
-                                  @RequestParam(required = false) Date dueDate, Pageable pageable) {
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) String paymentType,
+            @RequestParam(required = false) Integer installments,
+            @RequestParam(required = false) Date dueDate, Pageable pageable) {
         return billService.getAllPaged(name, description, paymentType, installments, dueDate, pageable);
     }
 
@@ -47,8 +49,8 @@ public class BillController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         billService.delete(id);
-        return "Successfully deleted sale";
+        return new ResponseEntity<>(HttpStatus.valueOf(204));
     }
 }
