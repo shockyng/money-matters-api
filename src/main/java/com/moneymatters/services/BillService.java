@@ -4,7 +4,6 @@ import com.moneymatters.data.dtos.BillDto;
 import com.moneymatters.data.mappers.BillDtoMapper;
 import com.moneymatters.data.models.Bill;
 import com.moneymatters.repositories.BillRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ public class BillService {
 
     private final BillRepository billRepository;
 
-    @Autowired
     public BillService(BillRepository billRepository) {
         this.billRepository = billRepository;
     }

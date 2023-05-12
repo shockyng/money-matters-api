@@ -4,7 +4,6 @@ import com.moneymatters.data.dtos.SaleDto;
 import com.moneymatters.data.mappers.SaleDtoMapper;
 import com.moneymatters.data.models.Sale;
 import com.moneymatters.repositories.SaleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ public class SaleService {
     private final SaleRepository saleRepository;
     private final UserService userService;
 
-    @Autowired
     SaleService(SaleRepository saleRepository, UserService userService) {
         this.saleRepository = saleRepository;
         this.userService = userService;

@@ -2,7 +2,6 @@ package com.moneymatters.controllers;
 
 import java.sql.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ public class BillController {
 
     private final BillService billService;
 
-    @Autowired
     public BillController(BillService billService) {
         this.billService = billService;
     }
