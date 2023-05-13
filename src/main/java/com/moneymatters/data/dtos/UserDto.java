@@ -26,6 +26,8 @@ public class UserDto {
     @NotBlank(message = "Email is required")
     private String email;
 
+    private Long saleId;
+
     @NotBlank
     @Size(min = 8, max = 20, message = "Password must be 8-20 characters")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

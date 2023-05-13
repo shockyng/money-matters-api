@@ -32,7 +32,7 @@ VALUES (100.0, 'Conta de Luz', 'Conta de luz referente ao mês de abril', 'Cart�
        (1000.0, 'Viagem de Férias', 'Passagens aéreas para viagem de férias', 'Cartão de Crédito', 1, '2023-06-20'),
        (75.0, 'Assinatura de Revista', 'Assinatura mensal de revista', 'Débito Automático', 1, '2023-06-05'),
        (400.0, 'Material Escolar', 'Material escolar para o semestre', 'Boleto Bancário', 1, '2023-07-01');
-INSERT INTO sales (sale_price, sale_status, sale_contract_type, user_fk)
+INSERT INTO sales (sale_price, sale_status, sale_contract_type, user_id)
 VALUES (1000.00, true, 1, 1),
        (1500.00, false, 2, 2),
        (2000.00, true, 1, 3),

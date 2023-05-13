@@ -23,7 +23,7 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @GetMapping
+    @GetMapping("/page")
     public Page<User> findAllPaged(@RequestParam(required = false) String username,
                                    @RequestParam(required = false) String email, Pageable pageable) {
         return userService.findAllPaged(username, email, pageable);

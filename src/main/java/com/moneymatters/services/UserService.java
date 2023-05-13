@@ -2,6 +2,7 @@ package com.moneymatters.services;
 
 import com.moneymatters.data.dtos.UserDto;
 import com.moneymatters.data.models.User;
+import com.moneymatters.repositories.SaleRepository;
 import com.moneymatters.repositories.UserRepository;
 import com.moneymatters.services.exceptions.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final SaleRepository saleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, SaleRepository saleRepository) {
         this.userRepository = userRepository;
+        this.saleRepository = saleRepository;
     }
 
     public User findById(Long id) {
@@ -49,6 +52,8 @@ public class UserService {
         user.setLastname(userDto.getLastname());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
+
+        user.getSales().add(saleRepository.getReferenceById(userDto.getSaleId()));
 
         return user;
     }
