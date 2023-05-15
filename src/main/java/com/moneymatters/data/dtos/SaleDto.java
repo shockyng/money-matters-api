@@ -3,11 +3,12 @@ package com.moneymatters.data.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
-public class WalletDto {
-
+public class SaleDto {
     private Long userId;
-    private String name;
-
+    private Double price;
+    private Boolean status;
+    private int contractType;
 }

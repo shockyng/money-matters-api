@@ -1,0 +1,45 @@
+INSERT INTO users (user_username, user_firstname, user_lastname, user_email, user_password)
+VALUES ('joao.silva', 'João', 'Silva', 'joao.silva@email.com', 'senha123'),
+       ('maria.santos', 'Maria', 'Santos', 'maria.santos@email.com', 'outrasenha'),
+       ('pedro.silva', 'Pedro', 'Silva', 'pedro.silva@email.com', '123456'),
+       ('ana.silva', 'Ana', 'Silva', 'ana.silva@email.com', 'abcdef'),
+       ('roberto.silva', 'Roberto', 'Silva', 'roberto.silva@email.com', 'qwerty'),
+       ('camila.santos', 'Camila', 'Santos', 'camila.santos@email.com', 'senha123'),
+       ('lucas.silva', 'Lucas', 'Silva', 'lucas.silva@email.com', '123456'),
+       ('carla.silva', 'Carla', 'Silva', 'carla.silva@email.com', 'abcdef'),
+       ('fernanda.santos', 'Fernanda', 'Santos', 'fernanda.santos@email.com', 'qwerty'),
+       ('jose.silva', 'José', 'Silva', 'jose.silva@email.com', 'senha123');
+INSERT INTO wallets (wallet_user_fk, wallet_name)
+VALUES (1, 'Carteira principal'),
+       (1, 'Carteira de férias'),
+       (2, 'Minha carteira'),
+       (3, 'Carteira de investimentos'),
+       (4, 'Carteira de emergência'),
+       (4, 'Carteira de viagem'),
+       (5, 'Carteira de negociação'),
+       (5, 'Carteira de reserva'),
+       (6, 'Carteira de compras'),
+       (6, 'Carteira de economias');
+INSERT INTO bills (bill_price, bill_name, bill_description, bill_payment_type, bill_installments, bill_due_date)
+VALUES (100.0, 'Conta de Luz', 'Conta de luz referente ao mês de abril', 'Cartão de Crédito', 1, '2023-05-15'),
+       (50.0, 'Assinatura de Streaming', 'Assinatura mensal do serviço de streaming', 'Débito Automático', 1,
+        '2023-05-20'),
+       (200.0, 'Aluguel', 'Aluguel do apartamento referente ao mês de maio', 'Boleto Bancário', 1, '2023-06-10'),
+       (300.0, 'Compra no Supermercado', 'Compras mensais no supermercado', 'Dinheiro', 1, '2023-05-12'),
+       (150.0, 'Gasolina', 'Abastecimento do carro', 'Cartão de Débito', 1, '2023-05-18'),
+       (80.0, 'Conta de Água', 'Conta de água referente ao mês de abril', 'Boleto Bancário', 1, '2023-05-22'),
+       (500.0, 'Telefone Celular', 'Conta mensal de telefone celular', 'Cartão de Crédito', 1, '2023-05-25'),
+       (1000.0, 'Viagem de Férias', 'Passagens aéreas para viagem de férias', 'Cartão de Crédito', 1, '2023-06-20'),
+       (75.0, 'Assinatura de Revista', 'Assinatura mensal de revista', 'Débito Automático', 1, '2023-06-05'),
+       (400.0, 'Material Escolar', 'Material escolar para o semestre', 'Boleto Bancário', 1, '2023-07-01');
+INSERT INTO sales (sale_price, sale_status, sale_contract_type, user_fk)
+VALUES (1000.00, true, 1, 1),
+       (1500.00, false, 2, 2),
+       (2000.00, true, 1, 3),
+       (1200.00, true, 2, 4),
+       (1800.00, false, 1, 5),
+       (2500.00, true, 2, 6),
+       (800.00, true, 1, 7),
+       (1600.00, false, 2, 8),
+       (3000.00, true, 1, 9),
+       (900.00, false, 2, 10);
