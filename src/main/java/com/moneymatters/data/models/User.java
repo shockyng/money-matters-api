@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,10 +42,12 @@ public class User {
 
     @Column(name = "user_created_at", nullable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
     @Column(name = "user_updated_at")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
 }
