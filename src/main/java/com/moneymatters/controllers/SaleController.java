@@ -3,6 +3,9 @@ package com.moneymatters.controllers;
 import com.moneymatters.data.dtos.SaleDto;
 import com.moneymatters.data.models.Sale;
 import com.moneymatters.services.SaleService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +40,7 @@ public class SaleController {
     }
 
     @PostMapping
-    public Sale store(@RequestBody SaleDto saleDto) {
+    public Sale store(@Valid @RequestBody SaleDto saleDto) {
         return saleService.store(saleDto);
     }
 
