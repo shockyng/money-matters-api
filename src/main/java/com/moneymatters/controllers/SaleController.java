@@ -29,6 +29,11 @@ public class SaleController {
         return saleService.getAllPaged(pageable);
     }
 
+    @GetMapping("/page/today-sales")
+    public Double getTodaySales() {
+        return saleService.getTodaySales();
+    }
+
     @GetMapping("/{id}")
     public Sale getById(@PathVariable("id") Long id) {
         return saleService.getById(id);
