@@ -14,6 +14,6 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
             "(SELECT COUNT(*) FROM Sale s2 WHERE EXTRACT(MONTH FROM s2.createdAt) = (EXTRACT(MONTH FROM CURRENT DATE)-1)) as lastMonth FROM Sale s")
     String getSalesComparedToPastMonth();
 
-    @Query("SELECT s FROM Sale s WHERE EXTRACT(YEAR FROM s.createdAt) = EXTRACT(YEAR FROM CURRENT DATE ) AND EXTRACT(DAY FROM s.createdAt) = EXTRACT(DAY FROM CURRENT DATE ) ORDER BY s.createdAt ASC")
-    Page<Sale> getTodaySales(Pageable pageable);
+    @Query("SELECT SUM(s.price) FROM Sale s WHERE EXTRACT(YEAR FROM s.createdAt) = EXTRACT(YEAR FROM CURRENT DATE ) AND EXTRACT(DAY FROM s.createdAt) = EXTRACT(DAY FROM CURRENT DATE )")
+    Double getTodaySales();
 }

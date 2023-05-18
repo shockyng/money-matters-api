@@ -27,8 +27,8 @@ public class SaleController {
     }
 
     @GetMapping("/page/today-sales")
-    public Page<Sale> getTodaySales(Pageable pageable) {
-        return saleService.getTodaySales(pageable);
+    public Double getTodaySales() {
+        return saleService.getTodaySales();
     }
 
     @GetMapping("/{id}")

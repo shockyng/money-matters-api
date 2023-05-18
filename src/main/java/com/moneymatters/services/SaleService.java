@@ -24,8 +24,8 @@ public class SaleService {
 
     }
 
-    public Page<Sale> getTodaySales(Pageable pageable) {
-        return saleRepository.getTodaySales(pageable);
+    public Double getTodaySales() {
+        return saleRepository.getTodaySales();
     }
 
     public Sale getById(Long id) {
