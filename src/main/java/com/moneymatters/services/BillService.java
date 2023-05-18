@@ -21,7 +21,8 @@ public class BillService {
         this.billRepository = billRepository;
     }
 
-    public Page<Bill> getAllPaged(String name, String description, String paymentType, Integer installments, Date dueDate, Pageable pageable) {
+    public Page<Bill> getAllPaged(String name, String description, String paymentType, Integer installments,
+            Date dueDate, Pageable pageable) {
 
         if (null != name && !name.isEmpty()) {
             return getAllByNamePaged(name, pageable);
@@ -59,17 +60,16 @@ public class BillService {
     }
 
     public Bill getById(Long id) throws Exception {
-        if (null == id || 0 >= id) throw new Exception("Id cannot be null or smaller than 0.");
+        if (null == id || 0 >= id)
+            throw new Exception("Id cannot be null or smaller than 0.");
         return billRepository.getReferenceById(id);
     }
 
     public Bill store(BillDto billDto) throws Exception {
-        isValid(billDto);
         return billRepository.save(BillDtoMapper.INSTANCE.toBill(billDto));
     }
 
     public Bill update(Long id, BillDto billDto) throws Exception {
-        isValid(billDto);
         Bill bill = getById(id);
         Bill billUpdated = BillDtoMapper.INSTANCE.toBill(billDto);
         billUpdated.setId(bill.getId());
@@ -79,21 +79,5 @@ public class BillService {
 
     public void delete(Long id) {
         billRepository.deleteById(id);
-    }
-
-    public void isValid(BillDto billDto) throws Exception {
-        if (null == billDto.getPrice() || 0 > billDto.getPrice()) {
-            throw new Exception("Price cannot be null and must be greater than 0.");
-        } else if (null == billDto.getName() || billDto.getName().trim().isEmpty()) {
-            throw new Exception("The name cannot be null or empty.");
-        } else if (null == billDto.getDescription() || billDto.getDescription().trim().isEmpty()) {
-            throw new Exception("Description cannot be null or empty.");
-        } else if (null == billDto.getPaymentType() || billDto.getPaymentType().trim().isEmpty()) {
-            throw new Exception("Payment type cannot be null or empty.");
-        } else if (null == billDto.getInstallments() || 0 > billDto.getInstallments()) {
-            throw new Exception("Instalments cannot be null and must be greater than 0.");
-        } else if (null == billDto.getDueDate() || billDto.getDueDate().trim().isEmpty()) {
-            throw new Exception("Due date cannot be null or empty.");
-        }
     }
 }

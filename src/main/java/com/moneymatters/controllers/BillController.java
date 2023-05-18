@@ -13,6 +13,8 @@ import com.moneymatters.data.dtos.BillDto;
 import com.moneymatters.data.models.Bill;
 import com.moneymatters.services.BillService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/bills")
 public class BillController {
@@ -39,12 +41,12 @@ public class BillController {
     }
 
     @PostMapping
-    public Bill store(@RequestBody BillDto billDto) throws Exception {
+    public Bill store(@Valid @RequestBody BillDto billDto) throws Exception {
         return billService.store(billDto);
     }
 
     @PutMapping("/{id}")
-    public Bill update(@PathVariable("id") Long id, @RequestBody BillDto billDto) throws Exception {
+    public Bill update(@PathVariable("id") Long id,@Valid @RequestBody BillDto billDto) throws Exception {
         return billService.update(id, billDto);
     }
 
