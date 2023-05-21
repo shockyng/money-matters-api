@@ -53,7 +53,9 @@ public class UserService {
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
 
-        user.getSales().add(saleRepository.getReferenceById(userDto.getSaleId()));
+        if (userDto.getSaleId() != null) {
+            user.getSales().add(saleRepository.getReferenceById(userDto.getSaleId()));
+        }
 
         return user;
     }
