@@ -70,11 +70,11 @@ public class UserService {
     }
 
     private Page<User> findByUsernamePaged(String username, Pageable pageable) {
-        return userRepository.findByUsername(username, pageable);
+        return userRepository.searchByUsername(username, pageable);
     }
 
     private Page<User> findByEmailPaged(String email, Pageable pageable) {
-        return userRepository.findByEmail(email, pageable);
+        return userRepository.searchByEmail(email, pageable);
     }
 
     public Integer userComparisonMonthOverMonth() {
@@ -85,4 +85,5 @@ public class UserService {
 
         return countUsersCurrentMonth - countUsersLastMonth;
     }
+
 }
