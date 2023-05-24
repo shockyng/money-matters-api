@@ -59,4 +59,7 @@ public class TransactionService {
         transactionRepository.deleteById(id);
     }
 
+    public Page<Transaction> findByTransactionType(Long id, Pageable pageable) {
+        return transactionRepository.findByTransactionType(id, pageable);
+    }
 }

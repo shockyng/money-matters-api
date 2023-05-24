@@ -32,6 +32,11 @@ public class TransactionController {
         return transactionService.findById(id);
     }
 
+    @GetMapping("/type/{id}")
+    public Page<Transaction> findByTransactionType(@PathVariable("id") Long id, Pageable pageable) {
+        return transactionService.findByTransactionType(id, pageable);
+    }
+
     @GetMapping("/user/{userId}")
     public List<Transaction> findByUserId(@PathVariable("userId") Long userId) {
         return transactionService.findByUserId(userId);
