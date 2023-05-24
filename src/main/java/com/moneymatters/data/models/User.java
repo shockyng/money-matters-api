@@ -48,6 +48,10 @@ public class User implements UserDetails {
     @JoinColumn(name = "user_id")
     private List<Sale> sales = new ArrayList<>();
 
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Role role;
+
     @Column(name = "user_created_at", nullable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @CreationTimestamp
