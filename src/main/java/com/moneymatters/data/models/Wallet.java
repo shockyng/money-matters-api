@@ -1,5 +1,6 @@
 package com.moneymatters.data.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ public class Wallet {
     @Column(name = "wallet_id", nullable = false)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "wallet_user_fk", nullable = false)
     private User user;

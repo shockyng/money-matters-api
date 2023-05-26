@@ -1,5 +1,6 @@
 package com.moneymatters.data.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -38,9 +39,15 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @JsonIgnore
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<Sale> sales = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Transaction> transactions = new ArrayList<>();
 
     @Column(name = "user_created_at", nullable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
