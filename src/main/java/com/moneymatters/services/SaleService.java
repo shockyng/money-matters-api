@@ -24,6 +24,10 @@ public class SaleService {
 
     }
 
+    public Double getTodaySales() {
+        return saleRepository.getTodaySales();
+    }
+
     public Sale getById(Long id) {
         return saleRepository.getReferenceById(id);
     }
@@ -47,4 +51,5 @@ public class SaleService {
     public void delete(Long id) {
         saleRepository.deleteById(id);
     }
+
 }

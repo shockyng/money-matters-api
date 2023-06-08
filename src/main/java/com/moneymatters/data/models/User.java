@@ -52,6 +52,11 @@ public class User implements UserDetails {
     @PrimaryKeyJoinColumn
     private Role role;
 
+    @JsonIgnore
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Transaction> transactions = new ArrayList<>();
+
     @Column(name = "user_created_at", nullable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @CreationTimestamp
