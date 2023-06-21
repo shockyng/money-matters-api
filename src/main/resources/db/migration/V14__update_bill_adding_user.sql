@@ -1,0 +1,2 @@
+ALTER TABLE bills
+ADD COLUMN user_fk INT DEFAULT 2 REFERENCES roles (role_id);

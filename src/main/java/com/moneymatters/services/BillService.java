@@ -22,7 +22,7 @@ public class BillService {
     }
 
     public Page<Bill> getAllPaged(String name, String description, String paymentType, Integer installments,
-            Date dueDate, Pageable pageable) {
+            Date dueDate, Long userId, Pageable pageable) {
 
         if (null != name && !name.isEmpty()) {
             return getAllByNamePaged(name, pageable);

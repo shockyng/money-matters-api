@@ -40,5 +40,9 @@ public class Bill {
 
     @Column(name = "bill_due_date")
     private Date dueDate;
+    
+    @JoinColumn(name = "user_fk")
+    @ManyToOne
+    private User user;
 
 }
