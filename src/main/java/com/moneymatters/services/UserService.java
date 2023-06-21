@@ -2,6 +2,7 @@ package com.moneymatters.services;
 
 import com.moneymatters.data.dtos.UserDto;
 import com.moneymatters.data.models.User;
+import com.moneymatters.repositories.SaleRepository;
 import com.moneymatters.repositories.UserRepository;
 import com.moneymatters.services.exceptions.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final SaleRepository saleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, SaleRepository saleRepository) {
         this.userRepository = userRepository;
+        this.saleRepository = saleRepository;
     }
 
     public User findById(Long id) {
@@ -50,6 +53,10 @@ public class UserService {
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
 
+        if (userDto.getSaleId() != null) {
+            user.getSales().add(saleRepository.getReferenceById(userDto.getSaleId()));
+        }
+
         return user;
     }
 
@@ -63,11 +70,11 @@ public class UserService {
     }
 
     private Page<User> findByUsernamePaged(String username, Pageable pageable) {
-        return userRepository.findByUsername(username, pageable);
+        return userRepository.searchByUsername(username, pageable);
     }
 
     private Page<User> findByEmailPaged(String email, Pageable pageable) {
-        return userRepository.findByEmail(email, pageable);
+        return userRepository.searchByEmail(email, pageable);
     }
 
     public Integer userComparisonMonthOverMonth() {
@@ -78,4 +85,5 @@ public class UserService {
 
         return countUsersCurrentMonth - countUsersLastMonth;
     }
+
 }

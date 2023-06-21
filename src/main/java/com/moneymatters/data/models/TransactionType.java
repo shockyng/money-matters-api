@@ -1,47 +1,36 @@
 package com.moneymatters.data.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "sales")
-public class Sale {
+@Table(name = "transactions_types")
+public class TransactionType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sale_id")
+    @Column(name = "transaction_type_id", nullable = false)
     private Long id;
 
-    @Column(name = "sale_price")
-    private Double price;
+    @Column(name = "transaction_type_name", nullable = false)
+    private String name;
 
-    @Column(name = "sale_status")
-    private Boolean status;
-
-    @Column(name = "sale_contract_type")
-    private int contractType;
-
-    @Column(name = "sale_created_at", nullable = false, updatable = false)
+    @Column(name = "transaction_type_created_at", nullable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "sale_updated_at")
+    @Column(name = "transaction_type_updated_at")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
 }

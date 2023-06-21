@@ -1,0 +1,1 @@
+ALTER TABLE wallets ADD wallet_amount DECIMAL(10,2) DEFAULT 0.00;

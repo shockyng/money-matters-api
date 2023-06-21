@@ -13,17 +13,19 @@ import org.springframework.stereotype.Service;
 public class SaleService {
 
     private final SaleRepository saleRepository;
-    private final UserService userService;
 
     @Autowired
     SaleService(SaleRepository saleRepository, UserService userService) {
         this.saleRepository = saleRepository;
-        this.userService = userService;
     }
 
     public Page<Sale> getAllPaged(Pageable pageable) {
         return saleRepository.findAll(pageable);
 
+    }
+
+    public Double getTodaySales() {
+        return saleRepository.getTodaySales();
     }
 
     public Sale getById(Long id) {
@@ -37,7 +39,6 @@ public class SaleService {
 
     public Sale store(SaleDto saleDto) {
         Sale sale = SaleDtoMapper.INSTANCE.toSale(saleDto);
-        sale.setUser(userService.findById(saleDto.getUserId()));
         return saleRepository.save(sale);
     }
 
@@ -50,4 +51,5 @@ public class SaleService {
     public void delete(Long id) {
         saleRepository.deleteById(id);
     }
+
 }

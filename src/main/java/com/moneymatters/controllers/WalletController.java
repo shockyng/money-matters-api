@@ -3,6 +3,9 @@ package com.moneymatters.controllers;
 import com.moneymatters.data.dtos.WalletDto;
 import com.moneymatters.data.models.Wallet;
 import com.moneymatters.services.WalletService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,12 +31,12 @@ public class WalletController {
     }
 
     @PostMapping
-    public Wallet store(@RequestBody WalletDto walletDto) {
+    public Wallet store(@Valid @RequestBody WalletDto walletDto) {
         return walletService.store(walletDto);
     }
 
     @PutMapping("/{id}")
-    public Wallet update(@PathVariable("id") Long id, @RequestBody WalletDto walletDto) {
+    public Wallet update(@PathVariable("id") Long id, @Valid @RequestBody WalletDto walletDto) {
         return walletService.update(id, walletDto);
     }
 }
