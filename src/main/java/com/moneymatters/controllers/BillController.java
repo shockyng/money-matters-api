@@ -27,11 +27,13 @@ public class BillController {
     }
 
     @GetMapping("/page")
-    public Page<Bill> getAllPaged(@RequestParam(required = false) String name,
+    public Page<Bill> getAllPaged(
+            @RequestParam(required = false) String name,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) String paymentType,
             @RequestParam(required = false) Integer installments,
-            @RequestParam(required = false) Date dueDate, Long userId, Pageable pageable) {
+            @RequestParam(required = false) Date dueDate,
+            @RequestParam Long userId, Pageable pageable) {
         return billService.getAllPaged(name, description, paymentType, installments, dueDate, userId, pageable);
     }
 

@@ -25,38 +25,38 @@ public class BillService {
             Date dueDate, Long userId, Pageable pageable) {
 
         if (null != name && !name.isEmpty()) {
-            return getAllByNamePaged(name, pageable);
+            return getAllByNamePaged(name, userId, pageable);
         } else if (null != description && !description.isEmpty()) {
-            return getAllByDescriptionPaged(description, pageable);
+            return getAllByDescriptionPaged(description, userId, pageable);
         } else if (null != paymentType && !paymentType.isEmpty()) {
-            return getAllByPaymentTypePaged(paymentType, pageable);
+            return getAllByPaymentTypePaged(paymentType, userId, pageable);
         } else if (null != installments && 0 >= installments) {
-            return getAllByInstallmentsPaged(installments, pageable);
+            return getAllByInstallmentsPaged(installments, userId, pageable);
         } else if (null != dueDate) {
-            return getAllByDueDatePaged(dueDate, pageable);
+            return getAllByDueDatePaged(dueDate, userId, pageable);
         }
 
         return billRepository.findAll(pageable);
     }
 
-    private Page<Bill> getAllByDueDatePaged(Date dueDate, Pageable pageable) {
-        return billRepository.findAllByDueDatePaged(dueDate, pageable);
+    private Page<Bill> getAllByDueDatePaged(Date dueDate, Long userId, Pageable pageable) {
+        return billRepository.findAllByDueDatePaged(dueDate, userId, pageable);
     }
 
-    private Page<Bill> getAllByInstallmentsPaged(Integer installments, Pageable pageable) {
-        return billRepository.findAllByInstallmentsPaged(installments, pageable);
+    private Page<Bill> getAllByInstallmentsPaged(Integer installments, Long userId, Pageable pageable) {
+        return billRepository.findAllByInstallmentsPaged(installments, userId, pageable);
     }
 
-    private Page<Bill> getAllByPaymentTypePaged(String paymentType, Pageable pageable) {
-        return billRepository.findAllByPaymentTypePaged(paymentType, pageable);
+    private Page<Bill> getAllByPaymentTypePaged(String paymentType, Long userId, Pageable pageable) {
+        return billRepository.findAllByPaymentTypePaged(paymentType, userId, pageable);
     }
 
-    private Page<Bill> getAllByDescriptionPaged(String description, Pageable pageable) {
-        return billRepository.findAllByDescriptionPaged(description, pageable);
+    private Page<Bill> getAllByDescriptionPaged(String description, Long userId, Pageable pageable) {
+        return billRepository.findAllByDescriptionPaged(description, userId, pageable);
     }
 
-    private Page<Bill> getAllByNamePaged(String name, Pageable pageable) {
-        return billRepository.findAllByNamePaged(name, pageable);
+    private Page<Bill> getAllByNamePaged(String name, Long userId, Pageable pageable) {
+        return billRepository.findAllByNamePaged(name, userId, pageable);
     }
 
     public Bill getById(Long id) throws Exception {
