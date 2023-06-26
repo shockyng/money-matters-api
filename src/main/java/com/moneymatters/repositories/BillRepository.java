@@ -10,19 +10,19 @@ import java.sql.Date;
 
 public interface BillRepository extends JpaRepository<Bill, Long> {
 
-    @Query("SELECT b FROM Bill b WHERE CONCAT(b.name, '') LIKE %?1%")
-    Page<Bill> findAllByNamePaged(String name, Pageable pageable);
+    @Query("SELECT b FROM Bill b WHERE CONCAT(b.name, '') LIKE %?1% AND b.user.id = ?2")
+    Page<Bill> findAllByNamePaged(String name, Long userId, Pageable pageable);
 
-    @Query("SELECT b FROM Bill b WHERE CONCAT(b.description, '') LIKE %?1%")
-    Page<Bill> findAllByDescriptionPaged(String description, Pageable pageable);
+    @Query("SELECT b FROM Bill b WHERE CONCAT(b.description, '') LIKE %?1% AND b.user.id = ?2")
+    Page<Bill> findAllByDescriptionPaged(String description, Long userId, Pageable pageable);
 
-    @Query("SELECT b FROM Bill b WHERE CONCAT(b.paymentType, '') LIKE %?1%")
-    Page<Bill> findAllByPaymentTypePaged(String paymentType, Pageable pageable);
+    @Query("SELECT b FROM Bill b WHERE CONCAT(b.paymentType, '') LIKE %?1% AND b.user.id = ?2")
+    Page<Bill> findAllByPaymentTypePaged(String paymentType, Long userId, Pageable pageable);
 
-    @Query("SELECT b FROM Bill b WHERE CONCAT(b.installments, '') LIKE %?1%")
-    Page<Bill> findAllByInstallmentsPaged(Integer installments, Pageable pageable);
+    @Query("SELECT b FROM Bill b WHERE CONCAT(b.installments, '') LIKE %?1% AND b.user.id = ?2")
+    Page<Bill> findAllByInstallmentsPaged(Integer installments, Long userId, Pageable pageable);
 
-    @Query("SELECT b FROM Bill b WHERE CONCAT(b.dueDate, '') LIKE %?1%")
-    Page<Bill> findAllByDueDatePaged(Date dueDate, Pageable pageable);
+    @Query("SELECT b FROM Bill b WHERE CONCAT(b.dueDate, '') LIKE %?1% AND b.user.id = ?2")
+    Page<Bill> findAllByDueDatePaged(Date dueDate, Long userId, Pageable pageable);
 
 }

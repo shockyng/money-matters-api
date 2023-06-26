@@ -27,12 +27,14 @@ public class BillController {
     }
 
     @GetMapping("/page")
-    public Page<Bill> getAllPaged(@RequestParam(required = false) String name,
+    public Page<Bill> getAllPaged(
+            @RequestParam(required = false) String name,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) String paymentType,
             @RequestParam(required = false) Integer installments,
-            @RequestParam(required = false) Date dueDate, Pageable pageable) {
-        return billService.getAllPaged(name, description, paymentType, installments, dueDate, pageable);
+            @RequestParam(required = false) Date dueDate,
+            @RequestParam Long userId, Pageable pageable) {
+        return billService.getAllPaged(name, description, paymentType, installments, dueDate, userId, pageable);
     }
 
     @GetMapping("/{id}")
@@ -46,7 +48,7 @@ public class BillController {
     }
 
     @PutMapping("/{id}")
-    public Bill update(@PathVariable("id") Long id,@Valid @RequestBody BillDto billDto) throws Exception {
+    public Bill update(@PathVariable("id") Long id, @Valid @RequestBody BillDto billDto) throws Exception {
         return billService.update(id, billDto);
     }
 
